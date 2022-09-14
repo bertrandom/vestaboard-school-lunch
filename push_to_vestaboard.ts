@@ -47,6 +47,11 @@ const sendMessageResponse = await fetch(
 	},
 );
 
-const body = await sendMessageResponse.json();
-
-console.log(`Message sent: ${body.message.id}`);
+if (sendMessageResponse.status === 200) {
+	const body = await sendMessageResponse.json();
+	console.log(`Message sent: ${body.message.id}`);
+} else {
+	console.error(
+		`${sendMessageResponse.status}: ${sendMessageResponse.statusText}`,
+	);
+}
