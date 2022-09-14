@@ -1,5 +1,7 @@
 # vestaboard-school-lunch
 
+Every day, my daugher is presented with two terrible options for lunch at school. This displays those options on my split-flap display in the morning, to get her excited about them and give her the illusion of choice.
+
 Retrieves the school lunch option choices from [SchoolCafé](https://www.schoolcafe.com/) and pushes today's choice to my split-flap display. Lunch choices are stored in an sqlite DB.
 
 ![web vestaboard com_simulator_ddec790d-031b-4226-abfa-1fdedb5902e6](https://user-images.githubusercontent.com/57770/190040398-2ea78476-001a-4173-bc71-9763c7fc3886.png)
