@@ -48,3 +48,5 @@ sqlite> SELECT * from lunches;
 │ 10 │ 2022-09-16 │ 102791       │ Orange Chicken Bites w/ Not- So-Fried Rice │ 1663113137 │
 └────┴────────────┴──────────────┴────────────────────────────────────────────┴────────────┘
 ```
+
+Timestamps are stored as unix timestamps.
