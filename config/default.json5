@@ -1,0 +1,12 @@
+{
+    "vestaboard": {
+        "api_key": "xxx",
+        "api_secret": "xxx",
+        "subscription_id": "xxx",
+    },
+    "schoolcafe": {
+        "username": "xxx",
+        "password": "xxx",
+        "school_id": "xxx"
+    }
+}

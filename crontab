@@ -1,0 +1,2 @@
+0 6 * * * cd /web/vestaboard-school-lunch && NODE_ENV=prod /home/bertrand/.deno/bin/deno run --allow-env --allow-read=./,.env,config,data --allow-write=data --allow-net=webapis.schoolcafe.com retrieve_lunch_menu.ts >> log/lunch.log 2>&1
+30 7 * * * cd /web/vestaboard-school-lunch && NODE_ENV=prod /home/bertrand/.deno/bin/deno run --allow-env --allow-read=./,.env,config,data --allow-write=data --allow-net=platform.vestaboard.com push_to_vestaboard.ts >> log/lunch.log 2>&1
