@@ -6,13 +6,13 @@ Retrieves the school lunch option choices from [SchoolCafé](https://www.schoolc
 
 ![web vestaboard com_simulator_ddec790d-031b-4226-abfa-1fdedb5902e6](https://user-images.githubusercontent.com/57770/190040398-2ea78476-001a-4173-bc71-9763c7fc3886.png)
 
-# setup
+## setup
 
 Copy `default.json5` to `local.json5` and fill in your School Cafe login and Vestaboard API keys.
 
 If you want to use different environments, you can copy it to `dev.json5` or `prod.json5` and preface any commands with `NODE_ENV=dev ` or `NODE_ENV=prod `.
 
-# usage
+## usage
 
 Retrieve the weekly lunch menu
 ```
@@ -26,7 +26,7 @@ deno run --allow-env --allow-read=./,.env,config,data --allow-write=data --allow
 
 While these commands can be run manually, it's expected that they are to be run via a cronjob. `crontab` contains an example.
 
-# debugging
+## debugging
 
 You can open the sqlite DB by doing this:
 
@@ -50,3 +50,7 @@ sqlite> SELECT * from lunches;
 ```
 
 Timestamps are stored as unix timestamps.
+
+## license
+
+MIT
