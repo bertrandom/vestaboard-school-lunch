@@ -8,7 +8,7 @@ Retrieves the school lunch option choices from [SchoolCafé](https://www.schoolc
 
 ## setup
 
-Copy `default.json5` to `local.json5` and fill in your School Cafe login and Vestaboard API keys.
+Copy `config/default.json5` to `config/local.json5` and fill in your School Cafe login and Vestaboard API keys.
 
 If you want to use different environments, you can copy it to `dev.json5` or `prod.json5` and preface any commands with `NODE_ENV=dev ` or `NODE_ENV=prod `.
 
