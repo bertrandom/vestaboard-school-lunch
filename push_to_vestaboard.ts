@@ -21,6 +21,11 @@ const rows = await query.allEntries({
 	menu_date: today,
 });
 
+if (rows.length === 0) {
+	console.log('No lunch data exists for today, aborting...');
+	Deno.exit(0);
+}
+
 const choices = [];
 
 for (const row of rows) {
