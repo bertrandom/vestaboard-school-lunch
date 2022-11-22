@@ -102,7 +102,7 @@ function parseRawWeeklyLunchMenu(rawMenu: any) {
 					menu_date: menuDate,
 					menu_item_id: hotLunch.MenuItemId,
 					menu_item_description: hotLunch.MenuItemDescription.replace(
-						/\(K-[0-9]+\)/, // Remove the appended (K-5) or (K-12)
+						/\([0-9A-Z- ]+\)/, // Remove the appended (K-5) or (K-12)
 						'',
 					).trim(),
 				});
