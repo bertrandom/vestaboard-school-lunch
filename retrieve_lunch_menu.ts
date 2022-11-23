@@ -96,16 +96,19 @@ function parseRawWeeklyLunchMenu(rawMenu: any) {
 		const menuDate = DateTime.fromFormat(day, 'M/d/yyyy').toISODate();
 
 		const hotLunches = rawMenu[day]['LUNCH- HOT'];
-		for (const hotLunch of hotLunches) {
-			if (hotLunch.MenuItemId > 0) {
-				menu.push({
-					menu_date: menuDate,
-					menu_item_id: hotLunch.MenuItemId,
-					menu_item_description: hotLunch.MenuItemDescription.replace(
-						/\([0-9A-Z- ]+\)/, // Remove the appended (K-5) or (K-12)
-						'',
-					).trim(),
-				});
+		if (hotLunches) {
+			for (const hotLunch of hotLunches) {
+				if (hotLunch.MenuItemId > 0) {
+					menu.push({
+						menu_date: menuDate,
+						menu_item_id: hotLunch.MenuItemId,
+						menu_item_description: hotLunch.MenuItemDescription
+							.replace(
+								/\([0-9A-Z- ]+\)/, // Remove the appended (K-5) or (K-12)
+								'',
+							).trim(),
+					});
+				}
 			}
 		}
 	}
