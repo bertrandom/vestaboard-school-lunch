@@ -2,9 +2,21 @@ import config from 'pamplemousse';
 import { DB } from 'sqlite';
 import { DateTime } from 'luxon';
 
+const now = DateTime.local({ zone: 'America/Los_Angeles' });
 const today = DateTime.local({ zone: 'America/Los_Angeles' }).toISODate();
+const tomorrow = DateTime.local({ zone: 'America/Los_Angeles' }).plus({
+	days: 1,
+}).toISODate();
 
 const db = new DB('data/lunch.db');
+
+let menuDate = null;
+// If it's in the morning, show today's lunch menu, but if it's the evening, show tomorrow's lunch menu
+if (now.toFormat('a') === 'AM') {
+	menuDate = today;
+} else {
+	menuDate = tomorrow;
+}
 
 const query = db.prepareQuery<
 	_,
@@ -18,11 +30,13 @@ const query = db.prepareQuery<
 >('SELECT * FROM lunches WHERE menu_date = :menu_date');
 
 const rows = await query.allEntries({
-	menu_date: today,
+	menu_date: menuDate,
 });
 
 if (rows.length === 0) {
-	console.log('No lunch data exists for today, aborting...');
+	console.log(
+		`No lunch data exists for target date ${menuDate}, aborting...`,
+	);
 	Deno.exit(0);
 }
 
