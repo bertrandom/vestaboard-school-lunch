@@ -1,6 +1,9 @@
 import config from 'pamplemousse';
 import { DB } from 'sqlite';
 import { DateTime } from 'luxon';
+import * as log from 'https://deno.land/std@0.182.0/log/mod.ts';
+import { setupLogging } from './lib/log.ts';
+await setupLogging();
 
 const now = DateTime.local({ zone: 'America/Los_Angeles' });
 const today = DateTime.local({ zone: 'America/Los_Angeles' }).toISODate();
@@ -34,7 +37,7 @@ const rows = await query.allEntries({
 });
 
 if (rows.length === 0) {
-	console.log(
+	log.info(
 		`No lunch data exists for target date ${menuDate}, aborting...`,
 	);
 	Deno.exit(0);
@@ -48,7 +51,7 @@ for (const row of rows) {
 
 const text = `AURORA'S LUNCH: ${choices.join(' OR ')}`;
 
-console.log(`Sending message to Vestaboard: ${text}`);
+log.info(`Sending message to Vestaboard: ${text}`);
 
 const sendMessageResponse = await fetch(
 	`https://platform.vestaboard.com/subscriptions/${config.vestaboard.subscription_id}/message`,
@@ -68,7 +71,7 @@ const sendMessageResponse = await fetch(
 
 if (sendMessageResponse.status === 200) {
 	const body = await sendMessageResponse.json();
-	console.log(`Message sent: ${body.message.id}`);
+	log.info(`Message sent: ${body.message?.id}`);
 } else {
 	console.error(
 		`${sendMessageResponse.status}: ${sendMessageResponse.statusText}`,

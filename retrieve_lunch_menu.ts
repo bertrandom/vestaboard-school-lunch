@@ -1,6 +1,9 @@
 import config from 'pamplemousse';
 import { DB } from 'sqlite';
 import { DateTime } from 'luxon';
+import * as log from 'https://deno.land/std@0.182.0/log/mod.ts';
+import { setupLogging } from './lib/log.ts';
+await setupLogging();
 
 async function getCachedToken(db: DB) {
 	const query = db.prepareQuery<[string]>(
@@ -144,9 +147,9 @@ async function addLunchesToDb(db: DB, menu) {
 	}
 
 	if (addedRowCount > 0) {
-		console.log(`Added ${addedRowCount} new lunches to DB.`);
+		log.info(`Added ${addedRowCount} new lunches to DB.`);
 	} else {
-		console.log(`No new lunches added to DB.`);
+		log.info(`No new lunches added to DB.`);
 	}
 }
 
@@ -176,12 +179,12 @@ let token = null;
 
 const cachedToken = await getCachedToken(db);
 if (!cachedToken) {
-	console.log(`Retrieving access token for ${config.schoolcafe.username}...`);
+	log.info(`Retrieving access token for ${config.schoolcafe.username}...`);
 
 	const tokenInfo = await getSchoolCafeTokenInfo();
-	console.log(`Access token for ${tokenInfo.email} retrieved.`);
+	log.info(`Access token for ${tokenInfo.email} retrieved.`);
 
-	console.log(`Storing access token in cache.`);
+	log.info(`Storing access token in cache.`);
 	db.query(
 		'INSERT INTO tokens (token, expires, created_at) VALUES (?, ?, ?)',
 		[
@@ -193,7 +196,7 @@ if (!cachedToken) {
 
 	token = tokenInfo.access_token;
 } else {
-	console.log(`Found token in cache.`);
+	log.info(`Found token in cache.`);
 	token = cachedToken;
 }
 

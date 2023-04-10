@@ -2,5 +2,8 @@
 0 6 * * * cd /web/vestaboard-school-lunch && NODE_ENV=prod /home/bertrand/.deno/bin/deno run --allow-env --allow-read=./,.env,config,data --allow-write=data --allow-net=webapis.schoolcafe.com retrieve_lunch_menu.ts >> log/lunch.log 2>&1
 0 18 * * * cd /web/vestaboard-school-lunch && NODE_ENV=prod /home/bertrand/.deno/bin/deno run --allow-env --allow-read=./,.env,config,data --allow-write=data --allow-net=webapis.schoolcafe.com retrieve_lunch_menu.ts >> log/lunch.log 2>&1
 
+## On Monday at 7 AM - Send today's school lunch to the Vestaboard
+0 7 * * 1 cd /web/vestaboard-school-lunch && NODE_ENV=prod /home/bertrand/.deno/bin/deno run --allow-env --allow-read=./,.env,config,data --allow-write=data --allow-net=platform.vestaboard.com push_to_vestaboard.ts >> log/lunch.log 2>&1
+
 ## S-Th 7:00 PM - Send tomorrow's school lunch to the Vestaboard
 0 19 * * 0,1,2,3,4 cd /web/vestaboard-school-lunch && NODE_ENV=prod /home/bertrand/.deno/bin/deno run --allow-env --allow-read=./,.env,config,data --allow-write=data --allow-net=platform.vestaboard.com push_to_vestaboard.ts >> log/lunch.log 2>&1
